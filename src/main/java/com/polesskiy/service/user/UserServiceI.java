@@ -1,5 +1,6 @@
 package com.polesskiy.service.user;
 
+import com.polesskiy.entity.Sensor;
 import com.polesskiy.entity.User;
 
 import java.util.List;
@@ -12,5 +13,5 @@ interface UserServiceI {
     void deleteByLogin(String login);
     User getByLogin(String login);
     List<User> getAllUsers();
-
+    List<Sensor> getAllSensors(User user);
 }

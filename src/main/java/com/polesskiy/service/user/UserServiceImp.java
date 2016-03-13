@@ -1,5 +1,6 @@
 package com.polesskiy.service.user;
 
+import com.polesskiy.entity.Sensor;
 import com.polesskiy.entity.User;
 import com.polesskiy.service.EMFService;
 
@@ -11,11 +12,11 @@ import java.util.List;
  * Created by polesskiy on 11.03.16.
  */
 public class UserServiceImp implements UserServiceI {
-    public EntityManager entityManager = EMFService.get().createEntityManager();
 
     @Override
     public boolean add(User user) {
         if (user != null) {
+            EntityManager entityManager = EMFService.get().createEntityManager();
             try {
                 entityManager.getTransaction().begin();
                 entityManager.persist(user);
@@ -32,7 +33,7 @@ public class UserServiceImp implements UserServiceI {
     @Override
     public void deleteByLogin(String login) {
         if (login != null) {
-            //User userForDeleting = getByLogin(login);
+            EntityManager entityManager = EMFService.get().createEntityManager();
             try {
                 entityManager.getTransaction().begin();
                 User userForDeleting = entityManager.find(User.class, login);
@@ -47,6 +48,7 @@ public class UserServiceImp implements UserServiceI {
     @Override
     public User getByLogin(String login) {
         if (login != null) {
+            EntityManager entityManager = EMFService.get().createEntityManager();
             try {
                 return entityManager.find(User.class, login);
             } finally {
@@ -58,12 +60,19 @@ public class UserServiceImp implements UserServiceI {
 
     @Override
     public List<User> getAllUsers() {
+        EntityManager entityManager = EMFService.get().createEntityManager();
         try {
             TypedQuery<User> namedQuery = entityManager.createNamedQuery("User.getAll", User.class);
             return namedQuery.getResultList();
         } finally {
             entityManager.close();
         }
+    }
+
+    @Override
+    public List<Sensor> getAllSensors(User user) {
+//        TODO implement this
+        return null;
     }
 
     /*

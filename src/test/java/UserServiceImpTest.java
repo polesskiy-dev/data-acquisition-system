@@ -10,38 +10,34 @@ import java.util.List;
 public class UserServiceImpTest {
     UserServiceImp userServiceImp = new UserServiceImp();
 
-    //Create user
-    User testUser = new User();//Create user
-
-    @Before
-    public void initUser() {
-        this.testUser.setLogin("test@email.mail");
-    }
-
     @Test
-    public void testSaveUser() throws Exception {
-        //store to db
-        boolean savingToDBResult = userServiceImp.add(testUser);
-        Assert.assertTrue(savingToDBResult);
-    }
+    public void testUserCRUD() throws Exception {
+        //init test sensor data
+        User testUser = new User();
+        testUser.setLogin("test@mail.mail");
 
-    @Test
-    public void testDeleteUser() throws Exception {
-        //delete from db
+        //add to DB
+        Assert.assertTrue(userServiceImp.add(testUser));
+
+        //get from DB
+        Assert.assertNotNull(userServiceImp.getByLogin(testUser.getLogin()));
+
+        //TODO update test here
+
+        //delete from DB
         userServiceImp.deleteByLogin(testUser.getLogin());
     }
 
     @Test
-    public void testGetUser() throws Exception {
-        String testLogin = testUser.getLogin();
-        //get from db
-        Assert.assertEquals(userServiceImp.getByLogin(testLogin).getLogin(), testLogin);
+    public void testGetAll() {
+        //get all from db
+        List<User> userList = userServiceImp.getAllUsers();
+        for (User user : userList) System.out.println(user);
     }
 
     @Test
-    public void testGetAll() {
-        List<User> userList = userServiceImp.getAllUsers();
-        for (User user : userList) System.out.println(user);
+    public void testGetAllSensors(){
+//        TODO implement this test
     }
 
 }
