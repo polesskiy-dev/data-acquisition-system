@@ -1,4 +1,4 @@
-package com.polesskiy.service;
+package com.polesskiy.dao;
 
 /**
  * Created by polesskiy on 11.03.16.

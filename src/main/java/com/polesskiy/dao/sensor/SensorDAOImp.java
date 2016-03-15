@@ -1,8 +1,7 @@
-package com.polesskiy.service.sensor;
+package com.polesskiy.dao.sensor;
 
 import com.polesskiy.entity.Sensor;
-import com.polesskiy.entity.User;
-import com.polesskiy.service.EMFService;
+import com.polesskiy.dao.EMFService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -11,8 +10,7 @@ import java.util.List;
 /**
  * Created by polesskiy on 12.03.16.
  */
-public class SensorServiceImp implements SensorServiceI {
-
+public class SensorDAOImp implements SensorDAOI {
 
     @Override
     public Sensor add(Sensor sensor) {

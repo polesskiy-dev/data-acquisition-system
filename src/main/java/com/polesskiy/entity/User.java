@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by polesskiy on 11.03.16.
@@ -16,7 +19,11 @@ import java.io.Serializable;
 })
 public class User implements Serializable {
     @Id
+    @Column(name = "USER_LOGIN")
     private String login;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ownerUser")
+    private Set<Sensor> sensors;
 
     public User() {
     }
@@ -27,6 +34,14 @@ public class User implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public Set<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(Set<Sensor> sensors) {
+        this.sensors = sensors;
     }
 
     @Override

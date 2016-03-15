@@ -11,11 +11,14 @@
 
     <context:component-scan base-package="com.polesskiy" />
 
-    <mvc:annotation-driven/>
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/views/</value>
         </property>
     </bean>
+
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"
+                   cache-period="31556926"/>
+
+    <mvc:annotation-driven/>
 </beans>

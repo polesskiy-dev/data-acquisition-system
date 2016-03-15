@@ -1,5 +1,7 @@
+package dao.layer;
+
 import com.polesskiy.entity.User;
-import com.polesskiy.service.user.UserServiceImp;
+import com.polesskiy.dao.user.UserDAOImp;
 import org.junit.*;
 
 import java.util.List;
@@ -7,8 +9,8 @@ import java.util.List;
 /**
  * Created by polesskiy on 12.03.16.
  */
-public class UserServiceImpTest {
-    UserServiceImp userServiceImp = new UserServiceImp();
+public class UserDAOImpTest {
+    UserDAOImp userDAOImp = new UserDAOImp();
 
     @Test
     public void testUserCRUD() throws Exception {
@@ -17,21 +19,22 @@ public class UserServiceImpTest {
         testUser.setLogin("test@mail.mail");
 
         //add to DB
-        Assert.assertTrue(userServiceImp.add(testUser));
+        Assert.assertTrue(userDAOImp.add(testUser));
 
         //get from DB
-        Assert.assertNotNull(userServiceImp.getByLogin(testUser.getLogin()));
+        Assert.assertNotNull(userDAOImp.getByLogin(testUser.getLogin()));
 
         //TODO update test here
 
         //delete from DB
-        userServiceImp.deleteByLogin(testUser.getLogin());
+        userDAOImp.deleteByLogin(testUser.getLogin());
     }
 
     @Test
     public void testGetAll() {
         //get all from db
-        List<User> userList = userServiceImp.getAllUsers();
+        List<User> userList = userDAOImp.getAllUsers();
+        System.out.println("All users:");
         for (User user : userList) System.out.println(user);
     }
 

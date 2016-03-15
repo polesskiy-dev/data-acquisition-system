@@ -1,14 +1,13 @@
-package com.polesskiy.service.sensor;
+package com.polesskiy.dao.sensor;
 
 import com.polesskiy.entity.Sensor;
-import com.polesskiy.entity.User;
 
 import java.util.List;
 
 /**
  * Created by polesskiy on 11.03.16.
  */
-public interface SensorServiceI {
+public interface SensorDAOI {
     Sensor add(Sensor sensor);
     void update(Sensor sensor);
     void deleteById(int id);

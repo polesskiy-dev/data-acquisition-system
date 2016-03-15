@@ -24,9 +24,17 @@
         <processorPath useClasspath="true" />
         <module name="JavaSpringJPATest01" />
       </profile>
+      <profile default="false" name="Annotation profile for SensorSystemJPA" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="SensorSystemJPA" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JavaSpringJPATest01" target="1.7" />
+      <module name="SensorSystemJPA" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
