@@ -14,12 +14,22 @@
     <!--scripts-->
     <script src="../resources/scripts/jquery-2.2.1.js"></script>
     <script src="../resources/scripts/bootstrap.js"></script>
+    <script src="../resources/scripts/sensor.js"></script>
+    <script src="../resources/scripts/sensor-data.js"></script>
     <script src="../resources/scripts/charts.js"></script>
     <!--google charts-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {packages: ['corechart', 'line']});
         google.charts.setOnLoadCallback(drawBackgroundColor);
+    </script>
+    <!--test data from controller-->
+    <script type="text/javascript">
+        var sensorsJSON = ${sensorsJSON};
+        var sensors = JSON.parse(sensorsJSON);
+        var testSensor = Sensor.fromObj(sensors[0]);
+        console.log(testSensor);
+        //        console.log(testSensor.dataNames);
     </script>
 
 </head>
