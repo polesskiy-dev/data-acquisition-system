@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: polesskiy
-  Date: 11.03.16
-  Time: 17:14
+  Date: 18.03.16
+  Time: 11:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,6 +14,14 @@
     <!--scripts-->
     <script src="../resources/scripts/jquery-2.2.1.js"></script>
     <script src="../resources/scripts/bootstrap.js"></script>
+    <script src="../resources/scripts/charts.js"></script>
+    <!--google charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawBackgroundColor);
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -37,6 +45,27 @@
         </div>
     </div>
 
+    <!--test sensor 1-->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Sensor name
+                </div>
+                <div id="testSensorPanelBody" class="panel-body">
+                    <div id="chart_div"></div>
+                    <div id="chart_div1"></div>
+                </div>
+                <div class="panel-footer">
+                    Sensor additional info
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
+<script>
+
+</script>
 </html>
+

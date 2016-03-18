@@ -28,6 +28,7 @@
                     </div>
                     <div>
                         <ul class="nav navbar-nav">
+                            <li><a href="/testuser@gmail.com/sensors.html">Sensors</a></li>
                             <li><a href="/about.html">About</a></li>
                         </ul>
                     </div>

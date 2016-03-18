@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="dffc1e76-f6b4-4582-beb9-7277090c606a" name="Bitbucket" url="https://Polesskiy@bitbucket.org/Polesskiy/data-acquisition-system.git">
+        <fileTransfer accessType="LOCAL" />
+      </webServer>
+    </option>
+  </component>
+</project>

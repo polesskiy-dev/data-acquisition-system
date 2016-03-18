@@ -21,7 +21,7 @@ import java.util.Map;
 public class SensorData implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "SENSOR_DATA_ID")
     private long id;
 
     @JsonIgnore
@@ -34,7 +34,7 @@ public class SensorData implements Serializable{
 
     @ElementCollection(fetch = FetchType.EAGER)
     @MapKeyColumn(name = "FIELD")
-    @CollectionTable(name="SENSORS_DATA_MAP", joinColumns = @JoinColumn(name = "SENSOR_DATA_MAP_ID", referencedColumnName = "ID"))
+    @CollectionTable(name = "SENSORS_DATA_MAP", joinColumns = @JoinColumn(name = "SENSOR_DATA_ID", referencedColumnName = "SENSOR_DATA_ID"))
     @Column(name = "VALUE")
     private Map<String, String> data = new HashMap<String, String>();
 
