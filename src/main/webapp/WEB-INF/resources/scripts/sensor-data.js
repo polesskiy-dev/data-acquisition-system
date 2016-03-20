@@ -8,9 +8,7 @@ class SensorData {
         this.data = data;
     }
 
-    get dataNames() {
-        return "hello";
-    }
+    //get
 }
 
 SensorData.fromObj = function (obj) {

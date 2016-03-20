@@ -16,25 +16,27 @@
     <script src="../resources/scripts/bootstrap.js"></script>
     <script src="../resources/scripts/sensor.js"></script>
     <script src="../resources/scripts/sensor-data.js"></script>
-    <script src="../resources/scripts/charts.js"></script>
+    <!--script src="../resources/scripts/charts.js"></script-->
     <!--google charts-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {packages: ['corechart', 'line']});
-        google.charts.setOnLoadCallback(drawBackgroundColor);
-    </script>
-    <!--test data from controller-->
+
+    <!--data from controller-->
     <script type="text/javascript">
         var sensorsJSON = ${sensorsJSON};
-        var sensors = JSON.parse(sensorsJSON);
-        var testSensor = Sensor.fromObj(sensors[0]);
-        console.log(testSensor);
-        //        console.log(testSensor.dataNames);
+        var sensorObjs = JSON.parse(sensorsJSON);
+
+        var sensors = [];
+        sensorObjs.forEach(
+                function (sensorObj) {
+                    sensors.push(Sensor.fromObj(sensorObj));
+                });
+
+        console.log(sensors);
     </script>
 
 </head>
 <body>
-<div class="container">
+<div id="sensorsContainer" class="container">
 
     <!--navbar-->
     <div class="row">
@@ -55,9 +57,9 @@
         </div>
     </div>
 
-    <!--test sensor 1-->
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <!--test sensor-->
+    <div id="sensorsRow" class="row">
+        <!--div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Sensor name
@@ -70,12 +72,20 @@
                     Sensor additional info
                 </div>
             </div>
-        </div>
+        </div-->
     </div>
 </div>
 </body>
 <script>
-
+    //charts
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(function () {
+        sensors.forEach(
+                function (sensor) {
+                    $('#sensorsRow').append(constructSensorPanel(sensor));
+                }
+        );
+    });
 </script>
 </html>
 
