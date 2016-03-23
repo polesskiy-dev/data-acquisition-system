@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by polesskiy on 15.03.16.
  */
 @Controller
-public class AboutController {
+public class AboutPageController {
     @RequestMapping(value= "/about.html", method = RequestMethod.GET)
     public String index(ModelMap model) {
         return "about.jsp";

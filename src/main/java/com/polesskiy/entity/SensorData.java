@@ -20,6 +20,7 @@ import java.util.Map;
 })
 public class SensorData implements Serializable {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "SENSOR_DATA_ID")
     private long id;

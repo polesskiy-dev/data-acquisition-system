@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by polesskiy on 18.03.16.
  */
 @Controller
-public class SensorsController {
+public class SensorsPageController {
     @RequestMapping(value = "/{usersLogin}/sensors.html", method = RequestMethod.GET)
     public ModelAndView pathVariable(@PathVariable String usersLogin) throws HttpClientErrorException {
         ModelAndView mav = new ModelAndView();

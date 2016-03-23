@@ -1,9 +1,8 @@
 /**
- * Created by polesskiy on 18.03.16.
+ * Sensor object
  */
 class Sensor {
-    constructor(id, name, additionalInfo, sensorDataList) {
-        this.id = id;
+    constructor(name, additionalInfo, sensorDataList) {
         this.name = name;
         this.additionalInfo = additionalInfo;
         this.sensorDataList = sensorDataList;
@@ -75,13 +74,9 @@ class Sensor {
  */
 Sensor.fromObj = function (obj) {
     //narrow cast internal objects to SensorData
-    var parsedSensorDataList = obj.sensorDataList.map(
-        function (item) {
-            return SensorData.fromObj(item);
-        }
-    );
+    var parsedSensorDataList = obj.sensorDataList.map(item=>SensorData.fromObj(item));
 
-    return new Sensor(obj.id, obj.name, obj.additionalInfo, parsedSensorDataList);
+    return new Sensor(obj.name, obj.additionalInfo, parsedSensorDataList);
 };
 
 

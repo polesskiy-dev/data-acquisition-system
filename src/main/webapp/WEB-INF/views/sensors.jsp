@@ -22,15 +22,11 @@
 
     <!--data from controller-->
     <script type="text/javascript">
-        var sensorsJSON = ${sensorsJSON};
-        var sensorObjs = JSON.parse(sensorsJSON);
-        console.log(sensorObjs);
+        var sensorObjects = JSON.parse(${sensorsJSON});
 
-        var sensors = sensorObjs.map(
-                function (sensorObj) {
-                    return Sensor.fromObj(sensorObj);
-                });
-
+        var sensors = sensorObjects.map(sensorObj = > Sensor.fromObj(sensorObj)
+        )
+        ;
         console.log(sensors);
     </script>
 

@@ -19,6 +19,7 @@ import java.util.Set;
 })
 public class Sensor implements Serializable {
     @Id
+    @JsonIgnore
     @Column(name = "SENSOR_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

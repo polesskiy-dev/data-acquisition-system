@@ -1,7 +1,7 @@
 /**
- * Created by polesskiy on 18.03.16.
+ * Chart data
+ * contains data for drawing chart on canvas
  */
-
 class Chart {
 
     constructor(parameterName, parametersArray) {
@@ -10,22 +10,23 @@ class Chart {
     }
 
     drawChart() {
+        const X_AXIS_DATA_INDEX = 0;
+        const Y_AXIS_DATA_INDEX = 1;
+        const NAN_VALUE_STUB = 0;
+
         var data = new google.visualization.DataTable();
 
         data.addColumn('datetime', 'Date');
-        //data.addColumn(Number.isInteger(this.parametersArray[0][1]) ? 'number' : 'string', this.parameterName);
         data.addColumn('number', this.parameterName);
 
         data.addRows(this.parametersArray.map(
             function (item) {
-                var value = parseInt(item[1]);
-                console.log([item[0], isNaN(value) ? 0 : value]);
-                //return isNaN() ? 0:parseInt(item);
-
-                return [item[0], isNaN(value) ? 0 : value];
+                var value = parseInt(item[Y_AXIS_DATA_INDEX]);
+                return [item[X_AXIS_DATA_INDEX], isNaN(value) ? NAN_VALUE_STUB : value];
             }
         ));
 
+        //set charts options
         var options = {
             title: this.parameterName,
             width: '100%',
@@ -38,6 +39,7 @@ class Chart {
             }
         };
 
+        //create charts container
         var container = document.createElement('div');
         var chart = new google.visualization.LineChart(container);
 
