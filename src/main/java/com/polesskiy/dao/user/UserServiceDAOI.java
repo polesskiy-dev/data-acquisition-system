@@ -1,6 +1,7 @@
 package com.polesskiy.dao.user;
 
 import com.polesskiy.entity.User;
+
 import java.util.List;
 
 /**
@@ -8,7 +9,8 @@ import java.util.List;
  */
 interface UserServiceDAOI {
     boolean add(User user);
-    void deleteByLogin(String login);
+
+    boolean deleteByLogin(String login);
     User getByLogin(String login);
     List<User> getAllUsers();
 }

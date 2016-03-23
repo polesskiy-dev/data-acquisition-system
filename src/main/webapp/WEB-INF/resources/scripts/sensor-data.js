@@ -7,8 +7,6 @@ class SensorData {
         this.date = date;
         this.data = data;
     }
-
-    //get
 }
 
 SensorData.fromObj = function (obj) {

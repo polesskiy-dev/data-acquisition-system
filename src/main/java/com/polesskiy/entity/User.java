@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,7 +20,7 @@ public class User implements Serializable {
     @Column(name = "USER_LOGIN")
     private String login;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ownerUser")
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "ownerUser")
     private Set<Sensor> sensors;
 
     public User() {

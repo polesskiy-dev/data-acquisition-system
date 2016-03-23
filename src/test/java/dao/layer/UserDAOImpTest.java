@@ -1,8 +1,10 @@
 package dao.layer;
 
-import com.polesskiy.entity.User;
 import com.polesskiy.dao.user.UserDAOImp;
-import org.junit.*;
+import com.polesskiy.entity.User;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 public class UserDAOImpTest {
     UserDAOImp userDAOImp = new UserDAOImp();
 
+    @Ignore
     @Test
     public void testUserCRUD() throws Exception {
         //init test sensor data
@@ -31,6 +34,13 @@ public class UserDAOImpTest {
     }
 
     @Test
+    public void deleteUser() {
+        final String USER_TO_DELETE_LOGIN = "testUser@forSensorData";
+        userDAOImp.deleteByLogin(USER_TO_DELETE_LOGIN);
+    }
+
+    @Ignore
+    @Test
     public void testGetAll() {
         //get all from db
         List<User> userList = userDAOImp.getAllUsers();
@@ -38,9 +48,11 @@ public class UserDAOImpTest {
         for (User user : userList) System.out.println(user);
     }
 
+    @Ignore
     @Test
-    public void testGetAllSensors(){
-//        TODO implement this test
+    public void testDeleteAllUsers() {
+        List<User> userList = userDAOImp.getAllUsers();
+        for (User user : userList) userDAOImp.deleteByLogin(user.getLogin());
     }
 
 }

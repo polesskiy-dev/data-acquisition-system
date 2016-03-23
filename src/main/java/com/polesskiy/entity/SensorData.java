@@ -18,7 +18,7 @@ import java.util.Map;
 @NamedQueries({
         @NamedQuery(name = "SensorData.getAll", query = "SELECT c from SensorData c ORDER BY c.id DESC"),
 })
-public class SensorData implements Serializable{
+public class SensorData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "SENSOR_DATA_ID")
@@ -41,6 +41,13 @@ public class SensorData implements Serializable{
     public SensorData() {
     }
 
+    public SensorData(Sensor ownerSensor, Date date, Map<String, String> data) {
+        this.ownerSensor = ownerSensor;
+        this.date = date;
+        this.data = data;
+    }
+
+    //<editor-fold desc="setters ans getters">
     public long getId() {
         return id;
     }
@@ -68,6 +75,7 @@ public class SensorData implements Serializable{
     public void setData(Map<String, String> data) {
         this.data = data;
     }
+    //</editor-fold>
 
     @Override
     public String toString() {

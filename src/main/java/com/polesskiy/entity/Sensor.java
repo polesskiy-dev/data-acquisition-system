@@ -3,11 +3,9 @@ package com.polesskiy.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -36,12 +34,21 @@ public class Sensor implements Serializable {
     @Column(name = "INFO")
     private String additionalInfo;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ownerSensor")
-    private Set<SensorData> sensorDataList;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "ownerSensor")
+    @OrderBy("DATE ASC")
+    private Set<SensorData> sensorDataList;// = new TreeSet<>(new SensorData.DateComparator());
 
     public Sensor() {
     }
 
+    public Sensor(User ownerUser, String name, String additionalInfo, Set<SensorData> sensorDataList) {
+        this.ownerUser = ownerUser;
+        this.name = name;
+        this.additionalInfo = additionalInfo;
+        this.sensorDataList = sensorDataList;
+    }
+
+    //<editor-fold desc="setters ans getters">
     public int getId() {
         return id;
     }
@@ -77,6 +84,7 @@ public class Sensor implements Serializable {
     public void setSensorDataList(Set<SensorData> sensorDataList) {
         this.sensorDataList = sensorDataList;
     }
+//</editor-fold>
 
     @Override
     public String toString() {

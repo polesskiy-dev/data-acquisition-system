@@ -1,7 +1,7 @@
 package com.polesskiy.dao.user;
 
-import com.polesskiy.entity.User;
 import com.polesskiy.dao.EMFService;
+import com.polesskiy.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -30,7 +30,7 @@ public class UserDAOImp implements UserServiceDAOI {
     }
 
     @Override
-    public void deleteByLogin(String login) {
+    public boolean deleteByLogin(String login) {
         if (login != null) {
             EntityManager entityManager = EMFService.get().createEntityManager();
             try {
@@ -38,10 +38,11 @@ public class UserDAOImp implements UserServiceDAOI {
                 User userForDeleting = entityManager.find(User.class, login);
                 entityManager.remove(userForDeleting);
                 entityManager.getTransaction().commit();
+                return true;
             } finally {
                 entityManager.close();
             }
-        }
+        } else return false;
     }
 
     @Override

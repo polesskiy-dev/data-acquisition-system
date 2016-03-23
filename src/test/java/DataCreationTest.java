@@ -28,15 +28,18 @@ public class DataCreationTest {
         userDAOImp.add(testUser);
 
         //test sensors
-        Sensor airSensor = new Sensor();
-        airSensor.setOwnerUser(testUser);
-        airSensor.setName("Air sensor");
-        airSensor.setAdditionalInfo(String.format("%s for temperature and humidity measuring.", airSensor.getName()));
+        Sensor airSensor = new Sensor(
+                testUser,
+                "Air sensor",
+                "Air sensor for temperature and humidity measuring.",
+                null);
 
-        Sensor weatherSensor = new Sensor();
-        weatherSensor.setOwnerUser(testUser);
-        weatherSensor.setName("Weather sensor");
-        weatherSensor.setAdditionalInfo(String.format("%s for pressure measuring and indicating  whether there is rain.", airSensor.getName()));
+
+        Sensor weatherSensor = new Sensor(
+                testUser,
+                "Weather sensor",
+                "Weather sensor for pressure measuring and indicating  whether there is rain.",
+                null);
 
         //add sensor to DB
         airSensor = sensorDAOImp.add(airSensor);
@@ -58,8 +61,8 @@ public class DataCreationTest {
             testSensorData.setDate(testDate);
 
             testSensorData.setData(new HashMap<String, String>() {{
-                put("temperature", String.format("%d C", temperatureValue));
-                put("humidity", String.format("%d %%", humidityValue));
+                put("Temperature", String.format("%d C", temperatureValue));
+                put("Humidity", String.format("%d %%", humidityValue));
             }});
 
             //save to db
@@ -80,8 +83,8 @@ public class DataCreationTest {
             testSensorData.setDate(testDate);
 
             testSensorData.setData(new HashMap<String, String>() {{
-                put("temperature", String.format("%d mmHg", pressureValue));
-                put("humidity", String.format("%b", isRain));
+                put("Pressure", String.format("%d mmHg", pressureValue));
+                put("isRain", String.format("%b", isRain));
             }});
 
             //save to db

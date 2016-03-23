@@ -11,9 +11,7 @@ class Sensor {
 }
 
 Sensor.fromObj = function (obj) {
-    var parsedSensorDataList = [];
-
-    obj.sensorDataList.forEach(
+    var parsedSensorDataList = obj.sensorDataList.map(
         function (item) {
             parsedSensorDataList.push(SensorData.fromObj(item));
         }
@@ -22,6 +20,11 @@ Sensor.fromObj = function (obj) {
     return new Sensor(obj.id, obj.name, obj.additionalInfo, parsedSensorDataList);
 };
 
+/**
+ * Create panel with charts of sensors data
+ * @param sensor
+ * @returns {Element}
+ */
 var constructSensorPanel = function (sensor) {
     const GRID_LAYOUT_CLASS_HALF = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
 
@@ -43,8 +46,27 @@ var constructSensorPanel = function (sensor) {
     divPanelHeading.innerHTML = sensor.name;
     divPanelFooter.innerHTML = sensor.additionalInfo;
 
-    var sensorDataArr = [[0, 0,], [1, 10], [2, 23], [10, 17]];
-    divPanelBody.appendChild(createChartFromSensorData(sensorDataArr, sensor.name));
+    /*
+     Test chart data
+     */
+
+
+    var chartDataArr = Object.keys(sensor.sensorDataList[0].data).map(
+        function (parameterName) {
+            var parameterValues = sensor.sensorDataList.map(
+                function (sensorData) {
+                    return ([new Date(sensorData.date), sensorData.data[parameterName]]);
+                });
+
+            return new ChartData(parameterName, parameterValues);
+        }
+    )
+
+    console.log(chartDataArr);
+
+    var testChartData = chartDataArr[0];//new ChartData("test value", [[new Date(1458322515000), 0], [new Date(1458322516000), 10], [new Date(1458322517000), 13], [new Date(1458322518000), 17]]);
+
+    divPanelBody.appendChild(testChartData.createChart());
 
     divPanel.appendChild(divPanelHeading);
     divPanel.appendChild(divPanelBody);
@@ -55,26 +77,3 @@ var constructSensorPanel = function (sensor) {
     return divGridLayout;
 }
 
-var createChartFromSensorData = function (sensorDataArr, paramName) {
-    var data = new google.visualization.DataTable();
-    data.addColumn('number', '');
-    data.addColumn('number', '');
-
-    data.addRows(sensorDataArr);
-
-    var options = {
-        hAxis: {
-            title: 'Time'
-        },
-        vAxis: {
-            title: paramName
-        }
-    };
-
-    var divChart = document.createElement('div');
-    var chart = new google.visualization.LineChart(divChart);
-
-    chart.draw(data, options);
-
-    return divChart;
-}
