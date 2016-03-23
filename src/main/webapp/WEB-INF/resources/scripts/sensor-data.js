@@ -4,7 +4,7 @@
 class SensorData {
     constructor(id, date, data) {
         this.id = id;
-        this.date = date;
+        this.date = new Date(date);
         this.data = data;
     }
 }

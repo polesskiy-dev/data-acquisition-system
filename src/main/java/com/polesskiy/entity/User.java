@@ -26,6 +26,7 @@ public class User implements Serializable {
     public User() {
     }
 
+    //<editor-fold desc="getters and setters">
     public String getLogin() {
         return login;
     }
@@ -41,6 +42,7 @@ public class User implements Serializable {
     public void setSensors(Set<Sensor> sensors) {
         this.sensors = sensors;
     }
+    //</editor-fold>
 
     @Override
     public String toString() {

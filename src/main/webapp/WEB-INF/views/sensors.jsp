@@ -16,7 +16,7 @@
     <script src="../resources/scripts/bootstrap.js"></script>
     <script src="../resources/scripts/sensor.js"></script>
     <script src="../resources/scripts/sensor-data.js"></script>
-    <script src="../resources/scripts/chart-data.js"></script>
+    <script src="../resources/scripts/chart.js"></script>
     <!--google charts-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -24,11 +24,11 @@
     <script type="text/javascript">
         var sensorsJSON = ${sensorsJSON};
         var sensorObjs = JSON.parse(sensorsJSON);
+        console.log(sensorObjs);
 
-        var sensors = [];
-        sensorObjs.forEach(
+        var sensors = sensorObjs.map(
                 function (sensorObj) {
-                    sensors.push(Sensor.fromObj(sensorObj));
+                    return Sensor.fromObj(sensorObj);
                 });
 
         console.log(sensors);
@@ -60,6 +60,19 @@
     <!--sensors charts-->
     <div id="sensorsRow" class="row">
     </div>
+
+    <!--add new sensor panel-->
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Add new sensor</div>
+                <div class="panel-body">
+                    <p>here user can add new sensor and redact its parameters</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 </body>
 <script>
@@ -68,7 +81,7 @@
     google.charts.setOnLoadCallback(function () {
         sensors.forEach(
                 function (sensor) {
-                    $('#sensorsRow').append(constructSensorPanel(sensor));
+                    $('#sensorsRow').append(sensor.constructSensorPanel());
                 }
         );
     });

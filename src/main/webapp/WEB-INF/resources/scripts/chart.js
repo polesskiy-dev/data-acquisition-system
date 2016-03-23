@@ -2,14 +2,14 @@
  * Created by polesskiy on 18.03.16.
  */
 
-class ChartData {
+class Chart {
 
     constructor(parameterName, parametersArray) {
         this.parameterName = parameterName;
         this.parametersArray = parametersArray;
     }
 
-    createChart() {
+    drawChart() {
         var data = new google.visualization.DataTable();
 
         data.addColumn('datetime', 'Date');
