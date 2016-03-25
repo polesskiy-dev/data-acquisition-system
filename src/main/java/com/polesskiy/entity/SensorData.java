@@ -22,12 +22,12 @@ public class SensorData implements Serializable {
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "SENSOR_DATA_ID")
+    @Column(name = "ID")
     private long id;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "SENSOR_ID", nullable = false)
+    @JoinColumn(name = "NAME", nullable = false)
     private Sensor ownerSensor;
 
     @Column(name = "DATE")
@@ -35,7 +35,7 @@ public class SensorData implements Serializable {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @MapKeyColumn(name = "FIELD")
-    @CollectionTable(name = "SENSORS_DATA_MAP", joinColumns = @JoinColumn(name = "SENSOR_DATA_ID", referencedColumnName = "SENSOR_DATA_ID"))
+    @CollectionTable(name = "SENSORS_DATA_MAP", joinColumns = @JoinColumn(name = "ID"))
     @Column(name = "VALUE")
     private Map<String, String> data = new HashMap<String, String>();
 

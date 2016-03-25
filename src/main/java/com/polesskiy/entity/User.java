@@ -17,7 +17,7 @@ import java.util.Set;
 })
 public class User implements Serializable {
     @Id
-    @Column(name = "USER_LOGIN")
+    @Column(name = "LOGIN")
     private String login;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "ownerUser")

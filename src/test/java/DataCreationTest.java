@@ -19,7 +19,7 @@ public class DataCreationTest {
     SensorDataDAOImp sensorDataDAOImp = new SensorDataDAOImp();
 
     @Test
-    public void createTestDataSuite() {
+    public void testCreateTestDataSuite() {
         //init test user data
         User testUser = new User();
         testUser.setLogin("testuser@gmail.com");

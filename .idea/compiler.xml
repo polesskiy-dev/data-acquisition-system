@@ -31,8 +31,16 @@
         <processorPath useClasspath="true" />
         <module name="SensorSystemJPA" />
       </profile>
+      <profile default="false" name="Annotation profile for DataAcquisitionSystem" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="DataAcquisitionSystem" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="DataAcquisitionSystem" target="1.7" />
       <module name="JavaSpringJPATest01" target="1.7" />
       <module name="SensorSystemJPA" target="1.7" />
     </bytecodeTargetLevel>

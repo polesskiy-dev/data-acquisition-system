@@ -12,6 +12,7 @@
     <properties>
         <jdk.version>1.7</jdk.version>
         <spring.version>4.2.5.RELEASE</spring.version>
+        <aspectjweaver.version>1.8.9</aspectjweaver.version>
         <hibernate.version>4.2.1.Final</hibernate.version>
         <mysql.connector.version>5.1.31</mysql.connector.version>
         <mysql.version>5.1.24</mysql.version>
@@ -47,13 +48,29 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!--Spring orm-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-
+        <!--Spring AOP-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
 
         <!-- MySQL -->
         <dependency>
@@ -73,6 +90,11 @@
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>1.0.1.Final</version>
         </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
 
         <!--Log-->
         <dependency>
@@ -88,7 +110,7 @@
         </dependency>
 
         <!--JSON-->
-        <dependency>
+        <dependency>1
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.6.3</version>

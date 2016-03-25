@@ -18,17 +18,12 @@ import java.util.Set;
         @NamedQuery(name = "Sensor.getAll", query = "SELECT c from Sensor c ORDER BY c.id DESC"),
 })
 public class Sensor implements Serializable {
-    @Id
-    @JsonIgnore
-    @Column(name = "SENSOR_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "USER_LOGIN", nullable = false)
+    @JoinColumn(name = "LOGIN", nullable = false)
     private User ownerUser;
 
+    @Id
     @Column(name = "NAME")
     private String name;
 
@@ -37,7 +32,7 @@ public class Sensor implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "ownerSensor")
     @OrderBy("DATE ASC")
-    private Set<SensorData> sensorDataList;// = new TreeSet<>(new SensorData.DateComparator());
+    private Set<SensorData> sensorDataList;
 
     public Sensor() {
     }
@@ -49,10 +44,13 @@ public class Sensor implements Serializable {
         this.sensorDataList = sensorDataList;
     }
 
-    //<editor-fold desc="setters ans getters">
+    //stub
+//    @JsonIgnore
     public int getId() {
-        return id;
+        return 0;
     }
+
+    //<editor-fold desc="setters ans getters">
 
     public String getName() {
         return name;
