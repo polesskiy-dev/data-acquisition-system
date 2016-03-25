@@ -1,7 +1,7 @@
-package com.polesskiy.fasade.dao.user;
+package com.polesskiy.dao.user;
 
+import com.polesskiy.dao.GenericDAOImp;
 import com.polesskiy.entity.User;
-import com.polesskiy.fasade.dao.GenericDAOImp;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;

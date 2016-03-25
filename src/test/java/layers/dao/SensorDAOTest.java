@@ -1,9 +1,9 @@
 package layers.dao;
 
+import com.polesskiy.dao.sensor.SensorDAOImp;
+import com.polesskiy.dao.user.UserDAOImp;
 import com.polesskiy.entity.Sensor;
 import com.polesskiy.entity.User;
-import com.polesskiy.fasade.dao.sensor.SensorDAOImp;
-import com.polesskiy.fasade.dao.user.UserDAOImp;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

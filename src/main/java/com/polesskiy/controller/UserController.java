@@ -10,12 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
- * Created by polesskiy on 23.03.16.
+ * REST User controller
  */
-
 @RestController
 public class UserController {
     @Autowired
@@ -25,12 +24,12 @@ public class UserController {
     Retrieve all users
      */
     @RequestMapping(value = "/users/", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> listAllUsers() {
-        List<User> users = userService.findAllUsers();
+    public ResponseEntity<Collection<User>> listAllUsers() {
+        Collection<User> users = userService.getAllUsers();
         if (users.isEmpty()) {
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     /*
@@ -39,12 +38,12 @@ public class UserController {
     @RequestMapping(value = "/{login}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUser(@PathVariable("login") String login) {
         System.out.println("Fetching User with login " + login);
-        User user = userService.findByLogin(login);
+        User user = userService.findUser(login);
         if (user == null) {
             System.out.println("User with login " + login + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     /*
@@ -56,14 +55,14 @@ public class UserController {
 
         if (userService.isUserExist(user)) {
             System.out.println("A User with name " + user.getLogin() + " already exist");
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         userService.saveUser(user);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/{login}").buildAndExpand(user.getLogin()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     /*
@@ -73,19 +72,19 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable("login") String login, @RequestBody User user) {
         System.out.println("Updating User " + login);
 
-        User currentUser = userService.findByLogin(login);
+        User currentUser = userService.findUser(login);
 
         if (currentUser == null) {
             System.out.println("User with login " + login + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         currentUser.setSensors(user.getSensors());
         //...
         // etc, like password and other fields
 
-        userService.updateUser(currentUser);
-        return new ResponseEntity<User>(currentUser, HttpStatus.OK);
+        userService.editUser(currentUser);
+        return new ResponseEntity<>(currentUser, HttpStatus.OK);
     }
 
     /*
@@ -95,14 +94,14 @@ public class UserController {
     public ResponseEntity<User> deleteUser(@PathVariable("login") String login) {
         System.out.println("Fetching & Deleting User with login " + login);
 
-        User user = userService.findByLogin(login);
+        User user = userService.findUser(login);
         if (user == null) {
             System.out.println("Unable to delete. User with login " + login + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        userService.deleteUserByLogin(login);
-        return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+        userService.deleteUser(login);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
@@ -114,6 +113,6 @@ public class UserController {
         System.out.println("Deleting All Users");
 
         userService.deleteAllUsers();
-        return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

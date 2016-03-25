@@ -1,4 +1,4 @@
-package com.polesskiy.fasade.dao;
+package com.polesskiy.dao;
 
 import org.springframework.stereotype.Repository;
 
@@ -45,6 +45,7 @@ public class GenericDAOImp<T, PK extends Serializable> implements GenericDAO<T, 
         try {
             entityManager.remove(entity);
         } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
         return true;

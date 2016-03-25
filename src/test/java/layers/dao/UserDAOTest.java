@@ -1,7 +1,7 @@
 package layers.dao;
 
+import com.polesskiy.dao.user.UserDAOImp;
 import com.polesskiy.entity.User;
-import com.polesskiy.fasade.dao.user.UserDAOImp;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;

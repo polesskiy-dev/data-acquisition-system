@@ -23,7 +23,7 @@ public class SensorsPageController {
         mav.setViewName("sensors.jsp");
 
         UserDAOImp userDAOImp = new UserDAOImp();
-        User user = userDAOImp.getByLogin(usersLogin);
+        User user = userDAOImp.find(usersLogin);
         if (user != null)
             try {
                 ObjectMapper mapper = new ObjectMapper();

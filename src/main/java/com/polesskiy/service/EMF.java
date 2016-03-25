@@ -1,4 +1,4 @@
-package com.polesskiy.fasade.service;
+package com.polesskiy.service;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

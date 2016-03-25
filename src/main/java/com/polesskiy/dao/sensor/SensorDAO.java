@@ -1,7 +1,7 @@
-package com.polesskiy.fasade.dao.sensor;
+package com.polesskiy.dao.sensor;
 
+import com.polesskiy.dao.GenericDAO;
 import com.polesskiy.entity.Sensor;
-import com.polesskiy.fasade.dao.GenericDAO;
 
 /**
  * Sensor DAO

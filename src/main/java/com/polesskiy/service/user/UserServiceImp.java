@@ -1,24 +1,27 @@
-package com.polesskiy.fasade.service.user.plainimplementation;
+package com.polesskiy.service.user;
 
+import com.polesskiy.dao.user.UserDAOImp;
 import com.polesskiy.entity.User;
-import com.polesskiy.fasade.dao.user.UserDAOImp;
-import com.polesskiy.fasade.service.EMF;
-import com.polesskiy.fasade.service.user.UserService;
+import com.polesskiy.service.EMF;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import java.util.Collection;
 
 /**
  * User Service layer
  * must be refactored to reduce code duplication
  */
+@Service("userService")
+@Transactional
 public class UserServiceImp implements UserService {
     private UserDAOImp userDAOImp = new UserDAOImp();
-    private EntityManager entityManager;
 
     @Override
     public User saveUser(User user) {
-        entityManager = EMF.get().createEntityManager();
+        EntityManager entityManager = EMF.get().createEntityManager();
         userDAOImp.setEntityManager(entityManager);
 
         try {
@@ -26,19 +29,23 @@ public class UserServiceImp implements UserService {
             User resultUser = userDAOImp.save(user);
             entityManager.getTransaction().commit();
             return resultUser;
+        } catch (PersistenceException e) {
+            System.err.printf("Maybe user: %s already exists in database\r\n", user);
+            e.printStackTrace();
         } finally {
             entityManager.close();
         }
+        return user;
     }
 
     @Override
     public Boolean deleteUser(String login) {
-        entityManager = EMF.get().createEntityManager();
+        EntityManager entityManager = EMF.get().createEntityManager();
         userDAOImp.setEntityManager(entityManager);
 
         try {
             entityManager.getTransaction().begin();
-            User user = this.findUser(login);
+            User user = userDAOImp.find(login);
             Boolean result = userDAOImp.delete(user);
             entityManager.getTransaction().commit();
             return result;
@@ -49,7 +56,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User editUser(User user) {
-        entityManager = EMF.get().createEntityManager();
+        EntityManager entityManager = EMF.get().createEntityManager();
         userDAOImp.setEntityManager(entityManager);
 
         try {
@@ -64,15 +71,12 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User findUser(String login) {
-        entityManager = EMF.get().createEntityManager();
+        EntityManager entityManager = EMF.get().createEntityManager();
         userDAOImp.setEntityManager(entityManager);
 
         try {
             entityManager.getTransaction().begin();
             User user = userDAOImp.find(login);
-            if (user != null) {
-            }
-            ;
             entityManager.getTransaction().commit();
             return user;
         } finally {
@@ -82,7 +86,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public Collection<User> getAllUsers() {
-        entityManager = EMF.get().createEntityManager();
+        EntityManager entityManager = EMF.get().createEntityManager();
         userDAOImp.setEntityManager(entityManager);
 
         try {
@@ -93,5 +97,25 @@ public class UserServiceImp implements UserService {
         } finally {
             entityManager.close();
         }
+    }
+
+    @Override
+    public void deleteAllUsers() {
+        EntityManager entityManager = EMF.get().createEntityManager();
+        userDAOImp.setEntityManager(entityManager);
+
+        try {
+            entityManager.getTransaction().begin();
+            Collection<User> users = userDAOImp.getAllUsers();
+            entityManager.getTransaction().commit();
+            for (User user : users) this.deleteUser(user.getLogin());
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public boolean isUserExist(User user) {
+        return this.findUser(user.getLogin()) != null;
     }
 }

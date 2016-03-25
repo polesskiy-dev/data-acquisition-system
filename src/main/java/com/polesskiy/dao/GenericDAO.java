@@ -1,4 +1,4 @@
-package com.polesskiy.fasade.dao;
+package com.polesskiy.dao;
 
 import java.io.Serializable;
 

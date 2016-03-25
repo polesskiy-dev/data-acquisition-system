@@ -1,19 +1,21 @@
 import com.polesskiy.entity.User;
-import com.polesskiy.dao.user.UserDAOImp;
+import com.polesskiy.service.user.UserService;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by polesskiy on 13.03.16.
  */
 public class DataReadingTest {
-    UserDAOImp userDAOImp = new UserDAOImp();
+    @Autowired
+    UserService userService;
 
     @Test
     public void readUserAndSensors() {
         //add test user to db
-        List<User> users = userDAOImp.getAllUsers();
+        Collection<User> users = userService.getAllUsers();
 
         for (User user : users) {
             System.out.printf("%s\r\n", user);
