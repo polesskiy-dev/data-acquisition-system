@@ -6,6 +6,7 @@ import com.polesskiy.entity.Sensor;
 import com.polesskiy.entity.User;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
@@ -39,6 +40,7 @@ public class SensorDAOTest {
         userDAOImp.delete(user);
     }
 
+    @Ignore
     @Test
     public void testDAOSensorCRUD() {
         Sensor sensor = new Sensor(user, "sensorDAOTestSensor", "no info", null);

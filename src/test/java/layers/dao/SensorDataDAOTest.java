@@ -8,6 +8,7 @@ import com.polesskiy.entity.SensorData;
 import com.polesskiy.entity.User;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
@@ -44,6 +45,14 @@ public class SensorDataDAOTest {
         sensorDAOImp.save(sensor);
     }
 
+    @After
+    public void clearTestUser() {
+        //delete
+
+        userDAOImp.delete(userDAOImp.find(user.getLogin()));
+    }
+
+    @Ignore
     @Test
     public void testDAOSensorCRUD() {
         SensorData sensorData = new SensorData(sensor, new Date(), new HashMap<String, String>() {{
@@ -68,12 +77,5 @@ public class SensorDataDAOTest {
         //delete
         System.out.printf("Deleting sensorData: %s\r\n", sensorData);
         sensorDataDAOImp.delete(sensorData);
-    }
-
-    @After
-    public void clearTestUser() {
-        //delete
-
-        userDAOImp.delete(userDAOImp.find(user.getLogin()));
     }
 }

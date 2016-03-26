@@ -44,12 +44,6 @@ public class Sensor implements Serializable {
         this.sensorDataList = sensorDataList;
     }
 
-    //stub
-//    @JsonIgnore
-    public int getId() {
-        return 0;
-    }
-
     //<editor-fold desc="setters ans getters">
 
     public String getName() {

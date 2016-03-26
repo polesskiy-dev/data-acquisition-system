@@ -2,6 +2,7 @@ package layers.dao;
 
 import com.polesskiy.dao.user.UserDAOImp;
 import com.polesskiy.entity.User;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,7 @@ public class UserDAOTest {
         userDAOImp.setEntityManager(entityManager);
     }
 
+    @Ignore
     @Test
     public void testCRUDUserDAO() {
         User user = new User();

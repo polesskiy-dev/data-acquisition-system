@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class AboutPageController {
-    @RequestMapping(value= "/about.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/about.html", method = RequestMethod.GET)
     public String index(ModelMap model) {
         return "about.jsp";
     }
