@@ -24,9 +24,11 @@
     <script type="text/javascript">
         var sensorObjects = JSON.parse(${sensorsJSON});
 
-        var sensors = sensorObjects.map(sensorObj = > Sensor.fromObj(sensorObj)
-        )
-        ;
+        var sensors = [];
+        sensorObjects.forEach(function (sensor) {
+            sensors.push(Sensor.fromObj(sensor));
+        });
+
         console.log(sensors);
     </script>
 

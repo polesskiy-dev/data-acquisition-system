@@ -1,4 +1,4 @@
-package com.polesskiy.controller;
+package com.polesskiy.rest.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

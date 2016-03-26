@@ -2,10 +2,13 @@ package com.polesskiy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.polesskiy.dao.user.UserDAOImp;
 import com.polesskiy.entity.User;
+import com.polesskiy.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,13 +20,20 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class SensorsPageController {
+    @Autowired
+    UserService userService;
+
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity handleClientErrorException(HttpClientErrorException e) {
+        return new ResponseEntity<>(e.getStatusCode().getReasonPhrase(), e.getStatusCode());
+    }
+
     @RequestMapping(value = "/{usersLogin}/sensors.html", method = RequestMethod.GET)
     public ModelAndView pathVariable(@PathVariable String usersLogin) throws HttpClientErrorException {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("sensors.jsp");
+        ModelAndView mav = new ModelAndView("sensors.jsp");
 
-        UserDAOImp userDAOImp = new UserDAOImp();
-        User user = userDAOImp.find(usersLogin);
+        User user = userService.findUser(usersLogin);
+
         if (user != null)
             try {
                 ObjectMapper mapper = new ObjectMapper();

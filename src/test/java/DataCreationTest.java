@@ -91,9 +91,10 @@ public class DataCreationTest {
 
 
         //add test user to db
-        if (userService.isUserExist(testUser)) {
-            System.out.printf("User with login: %s already exists. Merging User: %s\r\n", testUser.getLogin(), testUser);
-            userService.editUser(testUser);
+        if (userService.isUserExists(testUser)) {
+            System.out.printf("User with login: %s already exists. Replacing by User: %s\r\n", testUser.getLogin(), testUser);
+            userService.deleteUser(testUser.getLogin());
+            userService.saveUser(testUser);
         } else {
             System.out.printf("Saving User: %s\r\n", testUser);
             userService.saveUser(testUser);

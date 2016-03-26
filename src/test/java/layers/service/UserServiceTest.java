@@ -38,7 +38,7 @@ public class UserServiceTest {
     @Test
     /**
      * Test additional functions
-     * isUserExist
+     * isUserExists
      * deleteAll
      */
     public void UserAdditionalTest() {
@@ -48,8 +48,8 @@ public class UserServiceTest {
         User user1 = new User("2", null, null);
         userService.saveUser(user1);
 
-        //isUserExist
-        Assert.assertTrue(userService.isUserExist(user));
+        //isUserExists
+        Assert.assertTrue(userService.isUserExists(user));
 
         //delete all
         userService.deleteAllUsers();

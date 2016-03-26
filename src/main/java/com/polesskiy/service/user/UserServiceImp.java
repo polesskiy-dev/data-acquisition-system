@@ -115,7 +115,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean isUserExist(User user) {
+    public boolean isUserExists(User user) {
         return this.findUser(user.getLogin()) != null;
     }
 }

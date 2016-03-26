@@ -3,7 +3,6 @@ package com.polesskiy.dao;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 
 /**
@@ -28,7 +27,7 @@ public class GenericDAOImp<T, PK extends Serializable> implements GenericDAO<T, 
         return entityManager;
     }
 
-    @PersistenceContext
+    //    @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

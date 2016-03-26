@@ -1,4 +1,4 @@
-package com.polesskiy.controller;
+package com.polesskiy.rest.controller;
 
 import com.polesskiy.entity.User;
 import com.polesskiy.service.user.UserService;
@@ -53,7 +53,7 @@ public class UserController {
     public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating User " + user.getLogin());
 
-        if (userService.isUserExist(user)) {
+        if (userService.isUserExists(user)) {
             System.out.println("A User with name " + user.getLogin() + " already exist");
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
