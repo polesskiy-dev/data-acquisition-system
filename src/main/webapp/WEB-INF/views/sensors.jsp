@@ -10,15 +10,16 @@
 <head>
     <title>Data visualisation</title>
     <!--styles-->
-    <link rel="stylesheet" href="../resources/styles/bootstrap.css">
-    <!--scripts-->
-    <script src="../resources/scripts/jquery-2.2.1.js"></script>
-    <script src="../resources/scripts/bootstrap.js"></script>
-    <script src="../resources/scripts/sensor.js"></script>
-    <script src="../resources/scripts/sensor-data.js"></script>
-    <script src="../resources/scripts/chart.js"></script>
+    <link rel="stylesheet" href="../../resources/styles/bootstrap.css">
     <!--google charts-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--scripts-->
+    <script src="../../resources/scripts/jquery-2.2.1.js"></script>
+    <script src="../../resources/scripts/bootstrap.js"></script>
+    <script src="../../resources/scripts/model/sensor.js"></script>
+    <script src="../../resources/scripts/model/sensor-data.js"></script>
+    <script src="../../resources/scripts/chart.js"></script>
+
 
     <!--data from controller-->
     <script type="text/javascript">
@@ -46,7 +47,7 @@
                     </div>
                     <div>
                         <ul class="nav navbar-nav">
-                            <li><a href="/testuser@gmail.com/sensors.html">Sensors</a></li>
+                            <li><a href="/users/testuser@gmail.com/sensors.html">Sensors</a></li>
                             <li><a href="/about.html">About</a></li>
                         </ul>
                     </div>

@@ -1,35 +1,45 @@
 package com.polesskiy.service.sensor;
 
+import com.polesskiy.dao.sensor.SensorDAOImp;
 import com.polesskiy.entity.Sensor;
-
-import java.util.Collection;
+import com.polesskiy.service.GenericServiceImp;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by polesskiy on 25.03.16.
+ * Sensor service
  */
-public class SensorServiceImp implements SensorService {
+@Service("sensorService")
+@Transactional
+public class SensorServiceImp extends GenericServiceImp<Sensor, String> implements SensorService {
+    static SensorDAOImp sensorDAO = new SensorDAOImp();
+
+    public SensorServiceImp() {
+        super(sensorDAO);
+    }
+
     @Override
     public Sensor findSensor(String name) {
-        return null;
+        return super.find(name);
     }
 
     @Override
-    public Sensor saveSensor(Sensor sensor) {
-        return null;
+    public void saveSensor(Sensor sensor) {
+        super.save(sensor);
     }
 
     @Override
-    public Sensor editSensoe(Sensor sensor) {
-        return null;
+    public Sensor editSensor(Sensor sensor) {
+        return super.edit(sensor);
     }
 
     @Override
     public Boolean deleteSensor(String name) {
-        return null;
+        return super.delete(name);
     }
 
     @Override
-    public Collection<Sensor> getAllSensors() {
-        return null;
+    public Boolean isSensorExists(Sensor sensor){
+        return this.findSensor(sensor.getName()) != null;
     }
 }

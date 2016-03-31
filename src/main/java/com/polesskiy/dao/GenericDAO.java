@@ -1,5 +1,6 @@
 package com.polesskiy.dao;
 
+import javax.persistence.EntityManager;
 import java.io.Serializable;
 
 /**
@@ -9,11 +10,13 @@ import java.io.Serializable;
  * @param <PK> Primary yey to find by in database
  */
 public interface GenericDAO<T, PK extends Serializable> {
-    public T save(T entity);
+    void save(T entity);
 
-    public Boolean delete(T entity);
+    Boolean delete(T entity);
 
-    public T edit(T entuity);
+    T edit(T entuity);
 
-    public T find(PK entityIdentifier);
+    T find(PK entityIdentifier);
+
+    void setEntityManager(EntityManager entityManager);
 }

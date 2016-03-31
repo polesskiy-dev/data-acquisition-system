@@ -23,20 +23,23 @@ public class GenericDAOImp<T, PK extends Serializable> implements GenericDAO<T, 
         this.type = type;
     }
 
+    public void setType(Class<T> type) {
+        this.type = type;
+    }
+
     public EntityManager getEntityManager() {
         return entityManager;
     }
 
     //    @PersistenceContext
+    @Override
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public T save(T entity) {
+    public void save(T entity) {
         entityManager.persist(entity);
-        entityManager.flush();
-        return entity;
     }
 
     @Override

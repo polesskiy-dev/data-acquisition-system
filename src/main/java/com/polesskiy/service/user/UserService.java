@@ -10,7 +10,7 @@ import java.util.Collection;
 public interface UserService {
     User findUser(String login);
 
-    User saveUser(User user);
+    void saveUser(User user);
 
     User editUser(User user);
 

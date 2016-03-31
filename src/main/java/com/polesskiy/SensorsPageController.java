@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.polesskiy.entity.User;
 import com.polesskiy.service.user.UserService;
+import com.polesskiy.service.user.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class SensorsPageController {
-    @Autowired
-    UserService userService;
+    //@Autowired
+    UserService userService = new UserServiceImp();
 
     @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity handleClientErrorException(HttpClientErrorException e) {
         return new ResponseEntity<>(e.getStatusCode().getReasonPhrase(), e.getStatusCode());
     }
 
-    @RequestMapping(value = "/{usersLogin}/sensors.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{usersLogin}/sensors.html", method = RequestMethod.GET)
     public ModelAndView pathVariable(@PathVariable String usersLogin) throws HttpClientErrorException {
         ModelAndView mav = new ModelAndView("sensors.jsp");
 

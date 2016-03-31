@@ -14,10 +14,11 @@ public class UserServiceTest {
 
     @Test
     public void UserCRUDTest() {
-        User user = new User("testServiceUser@login", "testServiceUserPassword", null);
+        User user = new User("test1ServiceUser@login", "testServiceUserPassword", null);
 
         //save
         userService.saveUser(user);
+        System.out.println("Saving user");
 
         //find
         user = userService.findUser(user.getLogin());
@@ -35,12 +36,13 @@ public class UserServiceTest {
         for (User user1 : userService.getAllUsers()) System.out.println(user1);
     }
 
-    @Test
+
     /**
      * Test additional functions
      * isUserExists
      * deleteAll
      */
+    @Test
     public void UserAdditionalTest() {
         User user = new User("1", null, null);
         userService.saveUser(user);
@@ -50,6 +52,8 @@ public class UserServiceTest {
 
         //isUserExists
         Assert.assertTrue(userService.isUserExists(user));
+
+        System.out.println("Deleting all users");
 
         //delete all
         userService.deleteAllUsers();
