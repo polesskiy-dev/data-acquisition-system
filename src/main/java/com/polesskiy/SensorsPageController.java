@@ -21,15 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class SensorsPageController {
-    //@Autowired
-    UserService userService = new UserServiceImp();
+    @Autowired
+    UserService userService;
 
     @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity handleClientErrorException(HttpClientErrorException e) {
         return new ResponseEntity<>(e.getStatusCode().getReasonPhrase(), e.getStatusCode());
     }
 
-    @RequestMapping(value = "/users/{usersLogin}/sensors.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{usersLogin}/sensors.html", method = RequestMethod.GET)
     public ModelAndView pathVariable(@PathVariable String usersLogin) throws HttpClientErrorException {
         ModelAndView mav = new ModelAndView("sensors.jsp");
 

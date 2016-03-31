@@ -10,6 +10,11 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <context:component-scan base-package="com.polesskiy"/>
+    <context:component-scan base-package="com.polesskiy.entity"/>
+    <context:component-scan base-package="com.polesskiy.dao"/>
+    <context:component-scan base-package="com.polesskiy.service"/>
+    <context:component-scan base-package="com.polesskiy.rest.controller"/>
+
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">

@@ -5,10 +5,7 @@ import com.polesskiy.service.user.UserService;
 import com.polesskiy.service.user.UserServiceImp;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by polesskiy on 13.03.16.
@@ -18,6 +15,7 @@ public class DataCreationTest {
 
     @Test
     public void testCreateTestDataSuite() {
+
         //init test user data
         User testUser = new User("testuser@gmail.com", "pass", null);
 

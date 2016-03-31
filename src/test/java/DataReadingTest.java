@@ -3,7 +3,10 @@ import com.polesskiy.service.user.UserService;
 import com.polesskiy.service.user.UserServiceImp;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by polesskiy on 13.03.16.

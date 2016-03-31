@@ -8,7 +8,6 @@ import java.util.Collection;
 /**
  * User DAO
  */
-
 public interface UserDAO extends GenericDAO<User, String> {
     Collection<User> getAllUsers();
 }

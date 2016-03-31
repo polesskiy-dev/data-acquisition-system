@@ -4,11 +4,12 @@ import com.polesskiy.dao.user.UserDAO;
 import com.polesskiy.dao.user.UserDAOImp;
 import com.polesskiy.entity.User;
 import com.polesskiy.service.EMF;
-import com.polesskiy.service.GenericServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import java.util.Collection;
 
 /**
@@ -16,12 +17,9 @@ import java.util.Collection;
  */
 @Service("userService")
 @Transactional
-public class UserServiceImp extends GenericServiceImp<User, String> implements UserService {
-    static final UserDAO userDAO = new UserDAOImp();
-
-    public UserServiceImp() {
-        super(userDAO);
-    }
+public class UserServiceImp implements UserService {
+//    @Autowired
+    private UserDAO userDAO = new UserDAOImp();
 
     /**
      * Save user to DB
@@ -30,7 +28,19 @@ public class UserServiceImp extends GenericServiceImp<User, String> implements U
      */
     @Override
     public void saveUser(User user) {
-        super.save(user);
+        EntityManager entityManager = EMF.get().createEntityManager();
+        userDAO.setEntityManager(entityManager);
+
+        try {
+            entityManager.getTransaction().begin();
+            userDAO.save(user);
+            entityManager.getTransaction().commit();
+        } catch (PersistenceException e) {
+            System.err.printf("Maybe %s: %s already exists in database\r\n", user.getClass(), user);
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
     }
 
     /**
@@ -41,7 +51,18 @@ public class UserServiceImp extends GenericServiceImp<User, String> implements U
      */
     @Override
     public Boolean deleteUser(String login) {
-        return super.delete(login);
+        EntityManager entityManager = EMF.get().createEntityManager();
+        userDAO.setEntityManager(entityManager);
+
+        try {
+            entityManager.getTransaction().begin();
+            User user = userDAO.find(login);
+            Boolean result = userDAO.delete(user);
+            entityManager.getTransaction().commit();
+            return result;
+        } finally {
+            entityManager.close();
+        }
     }
 
     /**
@@ -52,7 +73,17 @@ public class UserServiceImp extends GenericServiceImp<User, String> implements U
      */
     @Override
     public User editUser(User user) {
-        return super.edit(user);
+        EntityManager entityManager = EMF.get().createEntityManager();
+        userDAO.setEntityManager(entityManager);
+
+        try {
+            entityManager.getTransaction().begin();
+            User updatedUser = userDAO.edit(user);
+            entityManager.getTransaction().commit();
+            return updatedUser;
+        } finally {
+            entityManager.close();
+        }
     }
 
     /**
@@ -63,7 +94,17 @@ public class UserServiceImp extends GenericServiceImp<User, String> implements U
      */
     @Override
     public User findUser(String login) {
-        return super.find(login);
+        EntityManager entityManager = EMF.get().createEntityManager();
+        userDAO.setEntityManager(entityManager);
+
+        try {
+            entityManager.getTransaction().begin();
+            User user = userDAO.find(login);
+            entityManager.getTransaction().commit();
+            return user;
+        } finally {
+            entityManager.close();
+        }
     }
 
     /**

@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @param <T>  Type of object to persist
  * @param <PK> Primary yey to find by in database
  */
-@Repository
+//@Repository
 public class GenericDAOImp<T, PK extends Serializable> implements GenericDAO<T, PK> {
     protected EntityManager entityManager;
     private Class<T> type;

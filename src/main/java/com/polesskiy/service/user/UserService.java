@@ -5,7 +5,7 @@ import com.polesskiy.entity.User;
 import java.util.Collection;
 
 /**
- * Created by polesskiy on 23.03.16.
+ * User service
  */
 public interface UserService {
     User findUser(String login);

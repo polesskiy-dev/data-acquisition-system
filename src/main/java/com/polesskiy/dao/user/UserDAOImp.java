@@ -10,7 +10,7 @@ import java.util.Collection;
 /**
  * User DAO implementation
  */
-@Repository
+@Repository("userDao")
 public class UserDAOImp extends GenericDAOImp<User, String> implements UserDAO {
     public UserDAOImp() {
         super(User.class);

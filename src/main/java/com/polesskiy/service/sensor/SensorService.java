@@ -3,7 +3,7 @@ package com.polesskiy.service.sensor;
 import com.polesskiy.entity.Sensor;
 
 /**
- * Created by polesskiy on 25.03.16.
+ * Sensor service
  */
 public interface SensorService {
     Sensor findSensor(String name);
