@@ -17,7 +17,7 @@ public class DataCreationTest {
     public void testCreateTestDataSuite() {
 
         //init test user data
-        User testUser = new User("testuser@gmail.com", "pass", null);
+        User testUser = new User("user@test", "pass", null);
 
         //test sensors
         final Sensor airSensor = new Sensor(

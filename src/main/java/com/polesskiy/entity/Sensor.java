@@ -14,9 +14,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SENSORS")
-@NamedQueries({
-        @NamedQuery(name = "Sensor.getAll", query = "SELECT c from Sensor c ORDER BY c.id DESC"),
-})
 public class Sensor implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -25,7 +22,7 @@ public class Sensor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "SENSOR_ID")
     private long id;
 
     @Column(name = "NAME")

@@ -8,6 +8,8 @@ import com.polesskiy.entity.Sensor;
 public interface SensorService {
     Sensor findSensor(long id);
 
+    Sensor findSensor(String userLogin, long id);
+
     Sensor saveSensor(Sensor sensor);
 
     Sensor editSensor(Sensor sensor);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
 /**
@@ -17,7 +18,7 @@ import javax.persistence.PersistenceException;
 @Service("sensorService")
 @Transactional
 public class SensorServiceImp implements SensorService {
-//    @Autowired
+    //    @Autowired
     private SensorDAO sensorDAO = new SensorDAOImp();
 
     @Override
@@ -33,6 +34,26 @@ public class SensorServiceImp implements SensorService {
         } finally {
             entityManager.close();
         }
+    }
+
+    @Override
+    public Sensor findSensor(String userLogin, long id) {
+        EntityManager entityManager = EMF.get().createEntityManager();
+        sensorDAO.setEntityManager(entityManager);
+
+        try {
+            entityManager.getTransaction().begin();
+            Sensor sensor = sensorDAO.find(userLogin, id);
+            entityManager.getTransaction().commit();
+            return sensor;
+        } catch (NoResultException e) {
+            System.err.printf("NoResultException: no sensor with id %d for user %s\r\n", id, userLogin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return null;
     }
 
     @Override
@@ -84,7 +105,7 @@ public class SensorServiceImp implements SensorService {
     }
 
     @Override
-    public Boolean isSensorExists(Sensor sensor){
+    public Boolean isSensorExists(Sensor sensor) {
         return this.findSensor(sensor.getId()) != null;
     }
 }

@@ -37,9 +37,13 @@ public class SensorServiceTest {
         sensorService.saveSensor(sensor);
         System.out.printf("Sensor saved, id=%d\r\n",sensor.getId());
 
-        //find
+        //find by id
         sensor = sensorService.findSensor(sensor.getId());
         System.out.printf("Found sensor: %s\r\n", sensor);
+
+        //find by users login and id
+        sensor = sensorService.findSensor(user.getLogin(), sensor.getId());
+        System.out.printf("Found sensor: %s, belonging to user: %s\r\n", sensor, user.getLogin());
 
         //update
         sensor = sensorService.editSensor(sensor);

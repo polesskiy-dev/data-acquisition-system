@@ -36,7 +36,6 @@ public class UserServiceImp implements UserService {
             userDAO.save(user);
             entityManager.getTransaction().commit();
         } catch (PersistenceException e) {
-            System.err.printf("Maybe %s: %s already exists in database\r\n", user.getClass(), user);
             e.printStackTrace();
         } finally {
             entityManager.close();

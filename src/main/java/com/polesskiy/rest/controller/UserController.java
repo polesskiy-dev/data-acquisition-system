@@ -24,7 +24,7 @@ public class UserController {
     /**
      * Retrieve all users.
      *
-     * @return all users JSON serialized and/or HTTP status
+     * @return all users in JSON and/or HTTP status
      */
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<User>> listAllUsers() {
@@ -39,7 +39,7 @@ public class UserController {
      * Retrieve user by login.
      *
      * @param login requested user login
-     * @return user JSON serialized and/or HTTP status
+     * @return user in JSON and/or HTTP status
      */
     @RequestMapping(value = "/{login}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUser(@PathVariable("login") String login) {
@@ -80,7 +80,7 @@ public class UserController {
      * Update user in DB
      *
      * @param user JSON serialized updated user
-     * @return JSON serialized updated user and/or HTTP status
+     * @return updated user in JSON and/or HTTP status
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> updateUser(@RequestBody User user) {

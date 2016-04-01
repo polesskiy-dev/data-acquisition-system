@@ -27,9 +27,10 @@ public class SensorData implements Serializable {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "NAME", nullable = false)
+    @JoinColumn(name = "SENSOR_ID", nullable = false)
     private Sensor ownerSensor;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATE")
     private Date date;
 
