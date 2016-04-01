@@ -18,6 +18,7 @@
     <script src="../../resources/scripts/bootstrap.js"></script>
     <script src="../../resources/scripts/model/sensor.js"></script>
     <script src="../../resources/scripts/model/sensor-data.js"></script>
+    <script src="../../resources/scripts/sensor-representation.js"></script>
     <script src="../../resources/scripts/chart.js"></script>
 
 
@@ -78,9 +79,10 @@
     //download charts lib
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(function () {
+        /**draw panels with charts for each sensor*/
         sensors.forEach(
                 function (sensor) {
-                    $('#sensorsRow').append(sensor.constructSensorPanel());
+                    $('#sensorsRow').append(createSensorChartsPanel(sensor));
                 }
         );
     });

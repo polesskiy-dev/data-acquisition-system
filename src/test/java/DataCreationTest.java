@@ -61,7 +61,7 @@ public class DataCreationTest {
 
         //fill weather sensor
         weatherSensor.setSensorDataList(new HashSet<SensorData>() {{
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 final int pressureValue = random.nextInt(50) + 725;
                 final boolean isRain = random.nextBoolean();
                 SensorData testSensorData = new SensorData();

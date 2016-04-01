@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.polesskiy.entity.User;
 import com.polesskiy.service.user.UserService;
 import com.polesskiy.service.user.UserServiceImp;
@@ -15,13 +17,15 @@ public class DataReadingTest {
     UserService userService = new UserServiceImp();
 
     @Test
-    public void readUserAndSensors() {
+    public void readUserAndSensors() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
         //add test user to db
         Collection<User> users = userService.getAllUsers();
 
         System.out.println("All users:");
         for (User user : users) {
-            System.out.printf("%s\r\n", user);
+            System.out.printf("%s\r\n", mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user));
         }
     }
 }

@@ -6,13 +6,13 @@ import com.polesskiy.entity.Sensor;
  * Sensor service
  */
 public interface SensorService {
-    Sensor findSensor(String name);
+    Sensor findSensor(long id);
 
-    void saveSensor(Sensor sensor);
+    Sensor saveSensor(Sensor sensor);
 
     Sensor editSensor(Sensor sensor);
 
-    Boolean deleteSensor(String name);
+    Boolean deleteSensor(long id);
 
     Boolean isSensorExists(Sensor sensor);
 }

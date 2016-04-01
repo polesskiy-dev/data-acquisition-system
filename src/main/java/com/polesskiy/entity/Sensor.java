@@ -24,6 +24,10 @@ public class Sensor implements Serializable {
     private User ownerUser;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private long id;
+
     @Column(name = "NAME")
     private String name;
 
@@ -45,6 +49,10 @@ public class Sensor implements Serializable {
     }
 
     //<editor-fold desc="setters ans getters">
+
+    public long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

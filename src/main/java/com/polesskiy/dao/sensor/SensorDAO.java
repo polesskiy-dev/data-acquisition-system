@@ -6,5 +6,5 @@ import com.polesskiy.entity.Sensor;
 /**
  * Sensor DAO
  */
-public interface SensorDAO extends GenericDAO<Sensor, String> {
+public interface SensorDAO extends GenericDAO<Sensor, Long> {
 }

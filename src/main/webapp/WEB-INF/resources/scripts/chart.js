@@ -1,14 +1,22 @@
 /**
- * Chart data
- * contains data for drawing chart on canvas
+ * Chart
  */
 class Chart {
 
+    /**
+     * Chart constructor
+     * @param parameterName name of parameter on Y axis
+     * @param parametersArray array of data for representation on the chart
+     */
     constructor(parameterName, parametersArray) {
         this.parameterName = parameterName;
         this.parametersArray = parametersArray;
     }
 
+    /**
+     * Draw chart
+     * @returns {Element} container with chart drawn in
+     */
     drawChart() {
         const X_AXIS_DATA_INDEX = 0;
         const Y_AXIS_DATA_INDEX = 1;
@@ -26,7 +34,7 @@ class Chart {
             }
         ));
 
-        //set charts options
+        /**set chart options*/
         var options = {
             title: this.parameterName,
             width: '100%',
@@ -39,7 +47,7 @@ class Chart {
             }
         };
 
-        //create charts container
+        /**create chart container*/
         var container = document.createElement('div');
         var chart = new google.visualization.LineChart(container);
 

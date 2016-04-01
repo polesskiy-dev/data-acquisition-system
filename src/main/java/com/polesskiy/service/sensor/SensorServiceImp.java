@@ -21,13 +21,13 @@ public class SensorServiceImp implements SensorService {
     private SensorDAO sensorDAO = new SensorDAOImp();
 
     @Override
-    public Sensor findSensor(String name) {
+    public Sensor findSensor(long id) {
         EntityManager entityManager = EMF.get().createEntityManager();
         sensorDAO.setEntityManager(entityManager);
 
         try {
             entityManager.getTransaction().begin();
-            Sensor sensor = sensorDAO.find(name);
+            Sensor sensor = sensorDAO.find(id);
             entityManager.getTransaction().commit();
             return sensor;
         } finally {
@@ -36,7 +36,7 @@ public class SensorServiceImp implements SensorService {
     }
 
     @Override
-    public void saveSensor(Sensor sensor) {
+    public Sensor saveSensor(Sensor sensor) {
         EntityManager entityManager = EMF.get().createEntityManager();
         sensorDAO.setEntityManager(entityManager);
 
@@ -45,11 +45,11 @@ public class SensorServiceImp implements SensorService {
             sensorDAO.save(sensor);
             entityManager.getTransaction().commit();
         } catch (PersistenceException e) {
-            System.err.printf("Maybe %s: %s already exists in database\r\n", sensor.getClass(), sensor);
             e.printStackTrace();
         } finally {
             entityManager.close();
         }
+        return sensor;
     }
 
     @Override
@@ -68,13 +68,13 @@ public class SensorServiceImp implements SensorService {
     }
 
     @Override
-    public Boolean deleteSensor(String name) {
+    public Boolean deleteSensor(long id) {
         EntityManager entityManager = EMF.get().createEntityManager();
         sensorDAO.setEntityManager(entityManager);
 
         try {
             entityManager.getTransaction().begin();
-            Sensor sensor = sensorDAO.find(name);
+            Sensor sensor = sensorDAO.find(id);
             Boolean result = sensorDAO.delete(sensor);
             entityManager.getTransaction().commit();
             return result;
@@ -85,6 +85,6 @@ public class SensorServiceImp implements SensorService {
 
     @Override
     public Boolean isSensorExists(Sensor sensor){
-        return this.findSensor(sensor.getName()) != null;
+        return this.findSensor(sensor.getId()) != null;
     }
 }

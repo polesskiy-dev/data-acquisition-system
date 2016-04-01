@@ -49,7 +49,7 @@ public class SensorDAOTest {
         sensorDAOImp.save(sensor);
 
         //find
-        sensor = sensorDAOImp.find(sensor.getName());
+        sensor = sensorDAOImp.find(sensor.getId());
         System.out.printf("Found sensor: %s\r\n", sensor);
 
         //update

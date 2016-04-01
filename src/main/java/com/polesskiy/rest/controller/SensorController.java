@@ -10,10 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
@@ -24,30 +21,21 @@ import org.springframework.web.util.UriComponentsBuilder;
  * REST Sensor controller
  */
 @RestController
-@RequestMapping("/users/{login}/")
+@RequestMapping("/user/{login}/")
 public class SensorController {
     @Autowired
     UserService userService;
     @Autowired
     SensorService sensorService;
 
+    @RequestMapping(value = "/{sensorName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Sensor> getSensor(@PathVariable("login") String login, @PathVariable("sensorName") String sensorName) {
+        User user = userService.findUser(login);
+        Sensor sensor = sensorService.findSensor(0);//!!!
+        if (user!=null && sensor!=null && user.getSensors().contains(sensor)){
+                return new ResponseEntity<>(sensor, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-//    private User user = userService.findUser();
-//
-//
-//    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Void> createSensor(@RequestBody Sensor sensor, UriComponentsBuilder ucBuilder) {
-//        System.out.println("Creating Sensor " + sensor.getName());
-//
-//        if (sensorService.isSensorExists(sensor)) {
-//            System.out.println("A Sensor with name " + sensor.getName() + " already exist");
-//            return new ResponseEntity<>(HttpStatus.CONFLICT);
-//        }
-//
-//        sensorService.saveSensor(sensor);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(ucBuilder.path("/{name}").buildAndExpand(sensor.getName()).toUri());
-//        return new ResponseEntity<>(headers, HttpStatus.CREATED);
-//    }
+    }
 }

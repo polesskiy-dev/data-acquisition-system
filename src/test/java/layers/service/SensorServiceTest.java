@@ -35,10 +35,10 @@ public class SensorServiceTest {
 
         //save
         sensorService.saveSensor(sensor);
-        System.out.println("Saving sensor");
+        System.out.printf("Sensor saved, id=%d\r\n",sensor.getId());
 
         //find
-        sensor = sensorService.findSensor(sensor.getName());
+        sensor = sensorService.findSensor(sensor.getId());
         System.out.printf("Found sensor: %s\r\n", sensor);
 
         //update
@@ -46,7 +46,7 @@ public class SensorServiceTest {
         System.out.printf("Updated sensor: %s\r\n", sensor);
 
         //delete
-        sensorService.deleteSensor(sensor.getName());
+        sensorService.deleteSensor(sensor.getId());
         System.out.printf("Deleting sensor: %s\r\n", sensor);
     }
 }

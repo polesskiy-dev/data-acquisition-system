@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Sensor DAO implementation
  */
 @Repository("sensorDAO")
-public class SensorDAOImp extends GenericDAOImp<Sensor, String> implements SensorDAO {
+public class SensorDAOImp extends GenericDAOImp<Sensor, Long> implements SensorDAO {
     public SensorDAOImp() {
         super(Sensor.class);
     }
