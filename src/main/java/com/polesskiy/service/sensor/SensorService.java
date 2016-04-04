@@ -15,6 +15,4 @@ public interface SensorService {
     Sensor editSensor(Sensor sensor);
 
     Boolean deleteSensor(long id);
-
-    Boolean isSensorExists(Sensor sensor);
 }

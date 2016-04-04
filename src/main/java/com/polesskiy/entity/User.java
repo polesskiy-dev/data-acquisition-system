@@ -2,6 +2,8 @@ package com.polesskiy.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,7 +25,7 @@ public class User implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "ownerUser")
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "ownerUser", orphanRemoval=true)
     private Set<Sensor> sensors;
 
     public User() {

@@ -3,7 +3,10 @@ package com.polesskiy.service.sensor;
 import com.polesskiy.dao.sensor.SensorDAO;
 import com.polesskiy.dao.sensor.SensorDAOImp;
 import com.polesskiy.entity.Sensor;
+import com.polesskiy.entity.User;
 import com.polesskiy.service.EMF;
+import com.polesskiy.service.user.UserService;
+import com.polesskiy.service.user.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,16 +99,15 @@ public class SensorServiceImp implements SensorService {
         try {
             entityManager.getTransaction().begin();
             Sensor sensor = sensorDAO.find(id);
+
+            //remove from parents collection
+            sensor.getOwnerUser().getSensors().remove(sensor);
+
             Boolean result = sensorDAO.delete(sensor);
             entityManager.getTransaction().commit();
             return result;
         } finally {
             entityManager.close();
         }
-    }
-
-    @Override
-    public Boolean isSensorExists(Sensor sensor) {
-        return this.findSensor(sensor.getId()) != null;
     }
 }

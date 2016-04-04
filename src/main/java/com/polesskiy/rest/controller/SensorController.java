@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * Created by polesskiy on 23.03.16.
- */
-
-/**
  * REST Sensor controller
  */
 @RestController
@@ -29,7 +25,8 @@ public class SensorController {
 
     /**
      * Retrieve sensor by id and users login
-     * @param login users login
+     *
+     * @param login    owner user login
      * @param sensorID sensors id
      * @return sensor in JSON and/or HTTP status
      */
@@ -45,19 +42,70 @@ public class SensorController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-//    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Void> createSensor(@RequestBody Sensor sensor, UriComponentsBuilder ucBuilder) {
-//        System.out.println("Creating Sensor " + sensor.getId());
-//
-//        if (userService.isUserExists(user)) {
-//            System.out.println("A User with name " + user.getLogin() + " already exist");
-//            return new ResponseEntity<>(HttpStatus.CONFLICT);
-//        }
-//
-//        userService.saveUser(user);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(ucBuilder.path("/{login}").buildAndExpand(user.getLogin()).toUri());
-//        return new ResponseEntity<>(headers, HttpStatus.CREATED);
-//    }
+    /**
+     * Create new sensor
+     * Save to DB, create new URI sensor location.
+     *
+     * @param login     owner user login
+     * @param sensor    sensor to create
+     * @param ucBuilder
+     * @return HTTP status
+     */
+    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> createSensor(@PathVariable("login") String login, @RequestBody Sensor sensor, UriComponentsBuilder ucBuilder) {
+
+        //update sensor
+        sensor.setOwnerUser(userService.findUser(login));
+        sensor.setId(0);
+
+        System.out.printf("Creating Sensor %s\r\n ", sensor);
+
+        sensorService.saveSensor(sensor);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(sensor.getId()).toUri());
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    /**
+     * Update sensor in DB
+     *
+     * @param login  owner user login
+     * @param sensor sensor to edit
+     * @return updated sensor in JSON and/or HTTP status
+     */
+    @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Sensor> editSensor(@PathVariable("login") String login, @RequestBody Sensor sensor) {
+        System.out.printf("Sensor for updating: %s\r\n", sensor);
+
+        if (sensorService.findSensor(login, sensor.getId()) != null) {
+            sensor.setOwnerUser(userService.findUser(login));
+
+            sensorService.editSensor(sensor);
+            return new ResponseEntity<>(sensor, HttpStatus.OK);
+        }
+
+        System.out.printf("Sensor with ID: %d not found in DB\r\n", sensor.getId());
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Delete sensor from DB
+     *
+     * @param login    owner user login
+     * @param sensorID sensor for deleting ID
+     * @return
+     */
+    @RequestMapping(value = "/{sensorID}", method = RequestMethod.DELETE)
+    public ResponseEntity<Sensor> deleteSensor(@PathVariable("login") String login, @PathVariable("sensorID") long sensorID) {
+        System.out.printf("Fetching & Deleting sensor with ID: %s\r\n ", sensorID);
+
+        if (sensorService.findSensor(login, sensorID) != null) {
+            sensorService.deleteSensor(sensorID);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        System.out.printf("Unable to delete. User with login: %s not found\r\n", login);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

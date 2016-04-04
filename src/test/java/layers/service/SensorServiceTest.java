@@ -52,5 +52,8 @@ public class SensorServiceTest {
         //delete
         sensorService.deleteSensor(sensor.getId());
         System.out.printf("Deleting sensor: %s\r\n", sensor);
+
+        //test user data
+        System.out.printf("User: %s", userService.findUser(this.user.getLogin()));
     }
 }

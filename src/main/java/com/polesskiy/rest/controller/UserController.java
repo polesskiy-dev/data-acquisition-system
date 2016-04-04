@@ -83,7 +83,7 @@ public class UserController {
      * @return updated user in JSON and/or HTTP status
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<User> editUser(@RequestBody User user) {
         System.out.printf("User for updating: %s\r\n", user);
 
         if (userService.isUserExists(user)) {
